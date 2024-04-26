@@ -1,34 +1,35 @@
-using System.Collections.Generic;
-
-namespace SistemaMediaAlunos
+public class Aluno
 {
-    public class Aluno 
+    public string Nome { get; set; }
+    public List<double> Notas { get; set; } = new List<double>();  // Inicialização da lista
+
+    // Construtor que recebe o nome do aluno
+    public Aluno(string nome)
     {
-        public string Nome { get; set; }
-        public List<double> Notas { get; set; } = new List<double>();  // Inicialização da lista
+        Nome = nome;
+        Notas = new List<double>(); // Inicializa a lista vazia
+    }
 
-        
-        public double CalcularMedia()
+    public double CalcularMedia()
+    {
+        double somaNotas = 0;
+        foreach (var nota in Notas)
         {
-            double somaNotas = 0;
-            foreach (var nota in Notas)
-            {
-                somaNotas += nota;
-            }
-            return somaNotas / Notas.Count;
+            somaNotas += nota;
         }
+        return somaNotas / Notas.Count;
+    }
 
-        public string VerificarSituacao()
+    public string VerificarSituacao()
+    {
+        double media = CalcularMedia();
+        if (media >= 7)
         {
-            double media = CalcularMedia();
-            if (media >= 7)
-            {
-                return "Aprovado";
-            }
-            else
-            {
-                return "Reprovado";
-            }
+            return "Aprovado";
+        }
+        else
+        {
+            return "Reprovado";
         }
     }
 }
